@@ -1,5 +1,8 @@
 package service;
 
+import model.Model;
+
 public interface ModelService {
-    public String getModelNameById(final int id);
+    Model getModelById(final int id);
+
 }

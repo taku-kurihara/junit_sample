@@ -2,6 +2,8 @@ package repository;
 
 import model.Model;
 
+import java.util.Optional;
+
 public interface ModelRepository {
-    public Model findById(final int id);
+    Optional<Model> findById(final int id);
 }

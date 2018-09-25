@@ -1,5 +1,6 @@
 package service.impl;
 
+import model.Model;
 import repository.ModelRepository;
 import service.ModelService;
 
@@ -12,9 +13,16 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public String getModelNameById(int id) {
+    public Model getModelById(final int id) {
+
         return modelRepository
                 .findById(id)
-                .getName();
+                .orElse(new Model(0, "John Doe"));
+    }
+
+
+    public String getModelName(final Model model) {
+
+        return model.getName();
     }
 }
