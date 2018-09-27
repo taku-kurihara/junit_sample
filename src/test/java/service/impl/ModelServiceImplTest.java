@@ -71,23 +71,18 @@ public class ModelServiceImplTest {
     @Test
     public void spyMethodTest() {
         // インスタンス生成時にモックしたいメソッドをオーバーライドした無名クラスを生成.
-        final ModelServiceImpl spiedModelService = new ModelServiceImpl(new ModelRepositoryMock()) {
-            /**
-             * {@link ModelServiceImpl#getModelName(Model)} のモックメソッド.
-             * @param model {@link Model}
-             * @return 固定値: John Doe
-             */
-            @Override
-            public String getModelName(Model model) {
-                return "John Doe";
-            }
-        };
-
-        final Model model = new Model();
+        final ModelServiceImpl spiedModelService = new ModelServiceImpl(
+                new ModelRepositoryImpl() {
+                    @Override
+                    public Optional<Model> findById(int id) {
+                        return Optional.empty();
+                    }
+                }
+        );
 
         assertThat(
                 "John Doe",
-                Is.is(spiedModelService.getModelName(model))
+                Is.is(spiedModelService.getModelById(2).getName())
         );
 
     }
