@@ -1,13 +1,13 @@
 package service.impl;
 
 import model.Model;
-import org.hamcrest.core.Is;
 import org.junit.Test;
 import repository.impl.ModelRepositoryImpl;
 import service.ModelService;
 
 import java.util.Optional;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -29,7 +29,7 @@ public class ModelServiceImplTest {
 
         assertThat(
                 model.getName(),
-                Is.is(modelService.getModelById(1).getName())
+                is(modelService.getModelById(1).getName())
         );
     }
 
@@ -46,7 +46,7 @@ public class ModelServiceImplTest {
 
         assertThat(
                 "John Doe",
-                Is.is(modelService.getModelById(2).getName())
+                is(modelService.getModelById(2).getName())
         );
     }
 
@@ -60,30 +60,30 @@ public class ModelServiceImplTest {
          * @return 中身のない {@link Optional}.
          */
         @Override
-        public Optional<Model> findById(int id) {
+        public Optional<Model> findById(final int id) {
             return Optional.empty();
         }
     }
 
     /**
-     * テスト対象の異なるメソッドをモック(スパイ)したい時のサンプル.
+     * 匿名クラスによるメソッドのスパイ.
      */
     @Test
     public void spyMethodTest() {
-        // インスタンス生成時にモックしたいメソッドをオーバーライドした無名クラスを生成.
-        final ModelServiceImpl spiedModelService = new ModelServiceImpl(
-                new ModelRepositoryImpl() {
+        /* インスタンス生成時にモックしたいメソッドをオーバーライドした無名クラスを生成.
+             ModelRepositoryMockを作るのと同じことが出来る
+         */
+        final ModelRepositoryImpl modelRepositoryMock = new ModelRepositoryImpl() {
                     @Override
-                    public Optional<Model> findById(int id) {
+                    public Optional<Model> findById(final int id) {
                         return Optional.empty();
                     }
-                }
-        );
+                };
+        final ModelServiceImpl spiedModelService = new ModelServiceImpl(modelRepositoryMock);
 
         assertThat(
                 "John Doe",
-                Is.is(spiedModelService.getModelById(2).getName())
+                is(spiedModelService.getModelById(2).getName())
         );
-
     }
 }

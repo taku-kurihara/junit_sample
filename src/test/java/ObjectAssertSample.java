@@ -1,16 +1,17 @@
 import model.Model;
-import org.hamcrest.Matchers;
-import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.hamcrest.Matchers.samePropertyValuesAs;
+import static org.hamcrest.core.Is.is;
 
 public class ObjectAssertSample {
     @Test
     public void singlePropertyAssert() {
         final Model expect = new Model(1, "name");
 
-        Assert.assertThat(1, Is.is(expect.getId()));
-        Assert.assertThat("name", Is.is(expect.getName()));
+        Assert.assertThat(1, is(expect.getId()));
+        Assert.assertThat("name", is(expect.getName()));
     }
 
     @Test
@@ -18,6 +19,6 @@ public class ObjectAssertSample {
         final Model expect = new Model(1, "name");
         final Model actual = new Model(1, "name");
 
-        Assert.assertThat(actual, Is.is(Matchers.samePropertyValuesAs(expect)));
+        Assert.assertThat(actual, is(samePropertyValuesAs(expect)));
     }
 }
