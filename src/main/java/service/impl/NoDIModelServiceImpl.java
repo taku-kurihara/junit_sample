@@ -5,6 +5,8 @@ import repository.ModelRepository;
 import repository.impl.ModelRepositoryImpl;
 import service.ModelService;
 
+import java.util.List;
+
 /**
  * <p>
  * 依存関係を直接注入したサービスクラス.
@@ -26,5 +28,14 @@ public class NoDIModelServiceImpl implements ModelService {
         return modelRepository
                 .findById(id)
                 .orElse(new Model(0, "John Doe"));
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@code null} 固定.
+     */
+    @Override
+    public List<Model> getAllModels() {
+        return null;
     }
 }

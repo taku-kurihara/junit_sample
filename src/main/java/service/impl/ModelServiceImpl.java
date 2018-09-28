@@ -4,6 +4,9 @@ import model.Model;
 import repository.ModelRepository;
 import service.ModelService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>
  * {@link ModelService}の実装クラス.
@@ -15,7 +18,7 @@ public class ModelServiceImpl implements ModelService {
     /** ModelRepositoryを継承していれば、代入可にする */
     private final ModelRepository modelRepository;
 
-    ModelServiceImpl(final ModelRepository modelRepository) {
+    public ModelServiceImpl(final ModelRepository modelRepository) {
         this.modelRepository = modelRepository;
     }
 
@@ -30,5 +33,15 @@ public class ModelServiceImpl implements ModelService {
         return modelRepository
                 .findById(id)
                 .orElse(new Model(0, "John Doe"));
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@code null}
+     */
+    @Override
+    public List<Model> getAllModels() {
+        // TODO: 実装すること.
+        return new ArrayList<>();
     }
 }

@@ -2,6 +2,8 @@ package service;
 
 import model.Model;
 
+import java.util.List;
+
 /**
  * サービスクラスのインターフェース.
  */
@@ -12,4 +14,10 @@ public interface ModelService {
      * @return {@link Model}.
      */
     Model getModelById(final int id);
+
+    /**
+     * {@link Model}を取得する.
+     * @return {@link Model} 一覧.
+     */
+    List<Model> getAllModels();
 }
