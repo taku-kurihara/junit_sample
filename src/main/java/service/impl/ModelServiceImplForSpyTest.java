@@ -3,6 +3,7 @@ package service.impl;
 import model.Model;
 import repository.impl.SpyTargetModelRepositoryImpl;
 import service.ModelService;
+import util.SampleUtil;
 
 import java.util.List;
 
@@ -40,5 +41,9 @@ public class ModelServiceImplForSpyTest implements ModelService {
 
     public String echo(final String message) {
         return modelRepository.echo(message);
+    }
+
+    public int add(final int value) {
+        return SampleUtil.increment(value);
     }
 }
